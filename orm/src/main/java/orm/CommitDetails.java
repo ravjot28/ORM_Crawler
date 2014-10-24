@@ -37,7 +37,7 @@ public class CommitDetails extends GithubProjects {
 	private String sha;
 	@Column(length = 4000)
 	private String parentSha;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "stock")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
 	private List<FileCommitDetails> fileCommitDetails = new ArrayList<FileCommitDetails>();
 
 	public int getId() {

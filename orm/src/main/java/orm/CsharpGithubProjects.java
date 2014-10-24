@@ -24,7 +24,7 @@ public class CsharpGithubProjects extends GithubProjects{
 	private String repositoryURL;
 	@Column(length=4000)
 	private String fileURL;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "stock")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
 	private List<CommitDetails> stockDailyRecords = new ArrayList<CommitDetails>();
 	public int getId() {
 		return id;
