@@ -1,10 +1,15 @@
 package orm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,7 +24,8 @@ public class PythonGithubProjects extends GithubProjects{
 	private String repositoryURL;
 	@Column(length=4000)
 	private String fileURL;
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "stock")
+	private List<CommitDetails> stockDailyRecords = new ArrayList<CommitDetails>();
 	public int getId() {
 		return id;
 	}
@@ -42,6 +48,14 @@ public class PythonGithubProjects extends GithubProjects{
 
 	public void setFileURL(String fileURL) {
 		this.fileURL = fileURL;
+	}
+
+	public List<CommitDetails> getStockDailyRecords() {
+		return stockDailyRecords;
+	}
+
+	public void setStockDailyRecords(List<CommitDetails> stockDailyRecords) {
+		this.stockDailyRecords = stockDailyRecords;
 	}
 
 }

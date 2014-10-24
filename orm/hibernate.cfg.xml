@@ -30,8 +30,11 @@
 		<property name="show_sql">true</property>
 
 		<!-- Drop and re-create the database schema on startup -->
-		<property name="hbm2ddl.auto">update</property>
-		<mapping class="orm.GitHubDetailsBean" />
+		<property name="hbm2ddl.auto">create</property>
+		<mapping class="orm.PythonGithubProjects" />
+		<mapping class="orm.PHPGithubProjects" />
+		<mapping class="orm.JavaGithubProjects" />
+		<mapping class="orm.CsharpGithubProjects" />
 	</session-factory>
 </hibernate-configuration>
 
