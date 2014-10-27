@@ -13,7 +13,7 @@ import org.kohsuke.github.GHCommit.ShortInfo;
 public class Test {
 	public static void main(String[] args) throws IOException {
 		GitHub github = GitHub.connect();
-		GHRepository r = github.getRepository("anthem001/NHibernateDemo");
+		GHRepository r = github.getRepository("kratisto/WebSite");
 		System.out.println(r.listCollaborators().asList().size());
 		System.out.println(r.listCommits().asList().size());
 		System.out.println(r.getForks());

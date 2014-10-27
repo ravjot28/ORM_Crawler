@@ -1,7 +1,7 @@
 package orm;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,16 +10,19 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Commit_Details")
-public class CommitDetails extends GithubProjects {
+public class CommitDetails {
 	@Id
 	@GeneratedValue(generator = "CommitDetails_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "CommitDetails_seq", name = "CommitDetails_seq")
+	@Column(name="commit_id")
 	private int id;
 	@Column(length = 4000)
 	private String message;
@@ -37,8 +40,13 @@ public class CommitDetails extends GithubProjects {
 	private String sha;
 	@Column(length = 4000)
 	private String parentSha;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
-	private List<FileCommitDetails> fileCommitDetails = new ArrayList<FileCommitDetails>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "commitDetails")
+	private List<FileCommitDetails> list = new ArrayList<FileCommitDetails>();
+
+	@ManyToOne
+	@JoinColumn(name = "project_id")
+	private GithubProjects project;
 
 	public int getId() {
 		return id;
@@ -104,14 +112,6 @@ public class CommitDetails extends GithubProjects {
 		this.parentSha = parentSha;
 	}
 
-	public List<FileCommitDetails> getFileCommitDetails() {
-		return fileCommitDetails;
-	}
-
-	public void setFileCommitDetails(List<FileCommitDetails> fileCommitDetails) {
-		this.fileCommitDetails = fileCommitDetails;
-	}
-
 	public Date getAuthorDate() {
 		return authorDate;
 	}
@@ -127,5 +127,23 @@ public class CommitDetails extends GithubProjects {
 	public void setCommitterDate(Date committerDate) {
 		this.committerDate = committerDate;
 	}
+
+	public GithubProjects getProject() {
+		return project;
+	}
+
+	public void setProject(GithubProjects project) {
+		this.project = project;
+	}
+
+	public List<FileCommitDetails> getList() {
+		return list;
+	}
+
+	public void setList(List<FileCommitDetails> list) {
+		this.list = list;
+	}
+	
+	
 
 }

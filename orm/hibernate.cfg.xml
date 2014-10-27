@@ -31,10 +31,9 @@
 
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">create</property>
-		<mapping class="orm.PythonGithubProjects" />
-		<mapping class="orm.PHPGithubProjects" />
-		<mapping class="orm.JavaGithubProjects" />
-		<mapping class="orm.CsharpGithubProjects" />
+		<mapping class="orm.GithubProjects" />
+		<mapping class="orm.CommitDetails" />
+		<mapping class="orm.FileCommitDetails" />
 	</session-factory>
 </hibernate-configuration>
 

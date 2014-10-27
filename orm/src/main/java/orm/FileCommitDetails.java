@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,7 +25,10 @@ public class FileCommitDetails {
 	private int linesRemoved;
 	@Lob
 	private String patch;
-
+	@ManyToOne
+	@JoinColumn(name = "commit_id")
+	private CommitDetails commitDetails;
+	
 	public int getId() {
 		return id;
 	}
@@ -70,6 +75,14 @@ public class FileCommitDetails {
 
 	public void setPatch(String patch) {
 		this.patch = patch;
+	}
+
+	public CommitDetails getCommitDetails() {
+		return commitDetails;
+	}
+
+	public void setCommitDetails(CommitDetails commitDetails) {
+		this.commitDetails = commitDetails;
 	}
 
 }

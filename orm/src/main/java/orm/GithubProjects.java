@@ -3,17 +3,37 @@ package orm;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GithubProjects {
-	private int id;
-	private String repositoryURL;
-	private String fileURL;
-	private int noOfCommits;
-	private int noOfCollaborators;
-	private int noOfForks;
-	private int listOfOpenIssues;
-	private int listOfClosedIssues;
-	private List<CommitDetails> stockDailyRecords = new ArrayList<CommitDetails>();
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "GitHub_Projects")
+public class GithubProjects {
+	@Id
+	@GeneratedValue(generator = "javaID_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "javaID_seq", name = "javaID_seq")
+	@Column(name="project_id")
+	private int id;
+	@Column(length = 4000)
+	private String repositoryURL;
+	@Column(length = 4000)
+	private String fileURL;
+	private String language;
+	private int noOfClosedIssues;
+	private int noOfOpenIssues;
+	private int noOfCollaborators;
+	private int noOfCommits;
+	private int noOfForks;
+	@OneToMany(mappedBy = "project")  
+	private List<CommitDetails> list = new ArrayList<CommitDetails>();
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -38,12 +58,36 @@ public class GithubProjects {
 		this.fileURL = fileURL;
 	}
 
-	public int getNoOfCommits() {
-		return noOfCommits;
+	public String getLanguage() {
+		return language;
 	}
 
-	public void setNoOfCommits(int noOfCommits) {
-		this.noOfCommits = noOfCommits;
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public List<CommitDetails> getList() {
+		return list;
+	}
+
+	public void setList(List<CommitDetails> list) {
+		this.list = list;
+	}
+
+	public int getNoOfClosedIssues() {
+		return noOfClosedIssues;
+	}
+
+	public void setNoOfClosedIssues(int noOfClosedIssues) {
+		this.noOfClosedIssues = noOfClosedIssues;
+	}
+
+	public int getNoOfOpenIssues() {
+		return noOfOpenIssues;
+	}
+
+	public void setNoOfOpenIssues(int noOfOpenIssues) {
+		this.noOfOpenIssues = noOfOpenIssues;
 	}
 
 	public int getNoOfCollaborators() {
@@ -54,36 +98,20 @@ public class GithubProjects {
 		this.noOfCollaborators = noOfCollaborators;
 	}
 
+	public int getNoOfCommits() {
+		return noOfCommits;
+	}
+
+	public void setNoOfCommits(int noOfCommits) {
+		this.noOfCommits = noOfCommits;
+	}
+
 	public int getNoOfForks() {
 		return noOfForks;
 	}
 
 	public void setNoOfForks(int noOfForks) {
 		this.noOfForks = noOfForks;
-	}
-
-	public int getListOfOpenIssues() {
-		return listOfOpenIssues;
-	}
-
-	public void setListOfOpenIssues(int listOfOpenIssues) {
-		this.listOfOpenIssues = listOfOpenIssues;
-	}
-
-	public int getListOfClosedIssues() {
-		return listOfClosedIssues;
-	}
-
-	public void setListOfClosedIssues(int listOfClosedIssues) {
-		this.listOfClosedIssues = listOfClosedIssues;
-	}
-
-	public List<CommitDetails> getStockDailyRecords() {
-		return stockDailyRecords;
-	}
-
-	public void setStockDailyRecords(List<CommitDetails> stockDailyRecords) {
-		this.stockDailyRecords = stockDailyRecords;
 	}
 
 }
